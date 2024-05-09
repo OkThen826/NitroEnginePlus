@@ -4,18 +4,21 @@
 
 #include <cstddef>
 
-struct Vec3i
+namespace nep
 {
-    Vec3i(int x = 0, int y = 0, int z= 0) : x(x), y(y), z(z) {}
-
-    union
+    struct Vec3i
     {
-        struct
+        Vec3i(int x = 0, int y = 0, int z= 0) : x(x), y(y), z(z) {}
+
+        union
         {
-            int x, y, z;
+            struct
+            {
+                int x, y, z;
+            };
+            int data[3];
         };
-        int data[3];
     };
-};
+}
 
 #endif
