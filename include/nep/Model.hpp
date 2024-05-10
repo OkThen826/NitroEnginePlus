@@ -60,6 +60,23 @@ namespace nep
             NE_ModelScale(mUnderlying, size.x, size.y, size.z);
         }
 
+        void SetScale(Vec3f size)
+        {
+            NE_ModelScale(mUnderlying, size.x, size.y, size.z);
+        }
+
+        void SetX(int x) {
+            mUnderlying->x = x;
+        }
+
+        void SetY(int y) {
+            mUnderlying->y = y;
+        }
+        
+        void SetZ(int z) {
+            mUnderlying->z = z;
+        }
+
     private:
         NE_Model* mUnderlying{};
     };

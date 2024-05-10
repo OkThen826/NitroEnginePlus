@@ -19,6 +19,20 @@ namespace nep
             int data[3];
         };
     };
+
+    struct Vec3f
+    {
+        Vec3f(float x = 0, float y = 0, float z= 0) : x(x), y(y), z(z) {}
+
+        union
+        {
+            struct
+            {
+                float x, y, z;
+            };
+            float data[3];
+        };
+    };
 }
 
 #endif

@@ -29,10 +29,13 @@ namespace nep
             NE_CameraUse(mUnderlying);
         }
 
+        void Move(Vec3i pos)
+        {
+            NE_CameraMoveI(mUnderlying, pos.x, pos.y, pos.z);
+        }
+
     private:
         NE_Camera* mUnderlying{};
-
-        static Camera* instance;
     };
 }
 

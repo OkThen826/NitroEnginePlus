@@ -20,10 +20,10 @@ DATA		:=	data
 INCLUDES	:=	include source/libdsf
 
 ifeq ($(NE_DEBUG),1)
-	TARGET	:=	NE_debug
+	TARGET	:=	NEP_debug
 	BUILD	:=	build_debug
 else
-	TARGET	:=	NE
+	TARGET	:=	NEP
 	BUILD	:=	build_release
 endif
 
