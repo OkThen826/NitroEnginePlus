@@ -8,7 +8,7 @@ namespace nep
     {
         //Static storage for singleton instances
         template<typename inst_t>
-        static constexpr auto& get()
+        constexpr auto& get()
         {
             static std::unique_ptr<inst_t> instance = std::make_unique<inst_t>();
             return instance;
