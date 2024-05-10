@@ -34,10 +34,10 @@ LIBDIRS		:= $(BLOCKSDS)/libs/libnds
 # ---------------
 
 ifeq ($(NE_DEBUG),1)
-	NAME		:= NE_debug
+	NAME		:= NEP_debug
 	BUILDDIR	:= build_debug
 else
-	NAME		:= NE
+	NAME		:= NEP
 	BUILDDIR	:= build_release
 endif
 INSTALLNAME	:= nitro-engine
