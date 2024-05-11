@@ -12,6 +12,10 @@ namespace nep
         {
             mUnderlying = NE_AnimationCreate();
         }
+
+        Animation(const Animation&) = delete;
+        Animation& operator=(const Animation&) = delete;
+
         ~Animation()
         {
             NE_AnimationDelete(mUnderlying);

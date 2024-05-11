@@ -4,6 +4,7 @@
 
 #include "Animation.hpp"
 #include "Material.hpp"
+#include "Vec.hpp"
 
 #include <NEModel.h>
 
@@ -20,6 +21,10 @@ namespace nep
             NE_ModelDelete(mUnderlying);
         }
 
+        //Don't copy models! The underlying pointer is NOT SHARED!
+        Model(const Model&) = delete;
+        Model& operator=(const Model&) = delete;
+
         void SetMaterial(const Material& material)
         {
             NE_ModelSetMaterial(mUnderlying, material.Unwrap());
@@ -35,32 +40,32 @@ namespace nep
             return NE_ModelLoadDSMFAT(mUnderlying, path) == 1;
         }
         
-        bool LoadStaticMesh(const void* meshData, const uint8_t modelBin[])
+        bool LoadStaticMesh(const void* meshData)
         {
-            return NE_ModelLoadStaticMesh(mUnderlying, modelBin) == 1;
+            return NE_ModelLoadStaticMesh(mUnderlying, meshData) == 1;
         }
 
-        void Rotate(Vec3i rot)
+        void Rotate(const Vec3i& rot)
         {
             NE_ModelRotate(mUnderlying, rot.x, rot.y, rot.z);
         }
 
-        void Draw()
+        void Draw() const
         {
             NE_ModelDraw(mUnderlying);
         }
 
-        void SetPosition(Vec3i pos)
+        void SetPosition(const Vec3i& pos)
         {
             NE_ModelSetCoord(mUnderlying, pos.x, pos.y, pos.z);
         }
 
-        void SetScale(Vec3i size)
+        void SetScale(const Vec3i& size)
         {
             NE_ModelScale(mUnderlying, size.x, size.y, size.z);
         }
 
-        void SetScale(Vec3f size)
+        void SetScale(const Vec3f& size)
         {
             NE_ModelScale(mUnderlying, size.x, size.y, size.z);
         }

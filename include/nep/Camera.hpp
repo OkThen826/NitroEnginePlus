@@ -15,6 +15,13 @@ namespace nep
         {
             mUnderlying = NE_CameraCreate();
         }
+        ~Camera()
+        {
+            NE_CameraDelete(mUnderlying);
+        }
+
+        Camera(const Camera&) = delete;
+        Camera& operator=(const Camera&) = delete;
 
         void Set(const Vec3i& position, const Vec3i& look, const Vec3i& up = Vec3i{ 0, 1, 0 })
         {

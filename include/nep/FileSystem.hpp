@@ -3,6 +3,7 @@
 #define FILESYSTEM_HPP
 
 #include <string>
+#include <vector>
 
 namespace nep
 {
@@ -10,6 +11,7 @@ namespace nep
     struct FileSystem
     {
         FileSystem();
+        
         void init(const std::string& romfile);
         File get(const std::string& path) const;
     private:
@@ -22,6 +24,7 @@ namespace nep
         ~File();
 
         void openBytes(const std::string& path);
+        void readAllBytes(std::vector<uint8_t>& content);
         void openText(const std::string& path);
         void readAllText(std::string& content);
         void close();

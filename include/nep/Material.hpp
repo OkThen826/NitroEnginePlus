@@ -17,6 +17,9 @@ namespace nep
             NE_MaterialDelete(mUnderlying);
         }
 
+        Material(const Material&) = delete;
+        Material& operator=(const Material&) = delete;
+
         bool TexLoad(NE_TextureFormat fmt, int sizeX, int sizeY, NE_TextureFlags flags, const void* texture)
         {
             return NE_MaterialTexLoad(mUnderlying, fmt, sizeX, sizeY, flags, texture) == 1;

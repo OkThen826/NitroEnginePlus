@@ -47,6 +47,16 @@ void File::openBytes(const std::string& path)
 {
     mHandle = fopen(path.c_str(), "rb");
 }
+void File::readAllBytes(std::vector<uint8_t>& content)
+{
+    auto len = length();
+    content.resize(len);
+
+    uint8_t* entireFile = content.data();
+    entireFile[len] = 0;
+    auto bytesRead = fread(entireFile, 1, len, std::bit_cast<FILE*>(mHandle));
+    sassert(bytesRead == len, "Fatal error whilst reading file!");
+}
 void File::openText(const std::string& path)
 {
     mHandle = fopen(path.c_str(), "r");
@@ -54,13 +64,12 @@ void File::openText(const std::string& path)
 void File::readAllText(std::string& content)
 {
     auto len = length();
-    char *entireFile = (char*)malloc(len+1);
+    content.resize(len);
+
+    char* entireFile = content.data();
     entireFile[len] = 0;
     auto bytesRead = fread(entireFile, 1, len, std::bit_cast<FILE*>(mHandle));
-    // std::cout << bytesRead << std::endl;
     sassert(bytesRead == len, "Fatal error whilst reading file!");
-    content = entireFile;
-    free(entireFile);
 }
 void File::close()
 {
