@@ -22,15 +22,15 @@ namespace nep
         }
 
         //Don't copy models! The underlying pointer is NOT SHARED!
-        Model(const Model&) = delete;
-        Model& operator=(const Model&) = delete;
+        Model(const nep::Model&) = delete;
+        Model& operator=(const nep::Model&) = delete;
 
-        void SetMaterial(const Material& material)
+        void SetMaterial(const nep::Material& material)
         {
             NE_ModelSetMaterial(mUnderlying, material.Unwrap());
         }
 
-        void SetAnimation(const Animation& animation)
+        void SetAnimation(const nep::Animation& animation)
         {
             NE_ModelSetAnimation(mUnderlying, animation.Unwrap());
         }
@@ -45,7 +45,7 @@ namespace nep
             return NE_ModelLoadStaticMesh(mUnderlying, meshData) == 1;
         }
 
-        void Rotate(const Vec3i& rot)
+        void Rotate(const nep::Vec3i& rot)
         {
             NE_ModelRotate(mUnderlying, rot.x, rot.y, rot.z);
         }
@@ -55,17 +55,35 @@ namespace nep
             NE_ModelDraw(mUnderlying);
         }
 
-        void SetPosition(const Vec3i& pos)
+        void SetPosition(const nep::Vec3i& pos)
+        {
+            NE_ModelSetCoord(mUnderlying, pos.x, pos.y, pos.z);
+        }
+        void SetPosition(const nep::Vec3f& pos)
         {
             NE_ModelSetCoord(mUnderlying, pos.x, pos.y, pos.z);
         }
 
-        void SetScale(const Vec3i& size)
+        Vec3i GetPosition()
         {
-            NE_ModelScale(mUnderlying, size.x, size.y, size.z);
+            return { f32toint(mUnderlying->x), f32toint(mUnderlying->y), f32toint(mUnderlying->z) };
+        }
+        Vec3f GetPositionF()
+        {
+            return { f32tofloat(mUnderlying->x), f32tofloat(mUnderlying->y), f32tofloat(mUnderlying->z) };
         }
 
-        void SetScale(const Vec3f& size)
+        void SetRotation(const nep::Vec3i& rot)
+        {
+            NE_ModelSetRot(mUnderlying, rot.x, rot.y, rot.z);
+        }
+
+        void SetScale(const nep::Vec3i& size)
+        {
+            NE_ModelScaleI(mUnderlying, size.x, size.y, size.z);
+        }
+
+        void SetScale(const nep::Vec3f& size)
         {
             NE_ModelScale(mUnderlying, size.x, size.y, size.z);
         }
